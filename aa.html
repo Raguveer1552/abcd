@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Entry</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    table {
+      margin: auto;
+      border-collapse: collapse;
+    }
+
+    td, th {
+      border: 1px solid #000;
+      padding: 10px 15px;
+    }
+
+    input, select, button {
+      padding: 5px 10px;
+      font-size: 14px;
+    }
+
+    #product_list {
+      margin-top: 30px;
+    }
+
+    button {
+      margin: 0 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Input Form -->
+  <table>
+    <tr>
+      <td>Product</td>
+      <td>
+        <select id="pname">
+          <option value="select">Select Product</option>
+          <option value="shirt">Shirt</option>
+          <option value="pant">Pant</option>
+          <option value="shoes">Shoes</option>
+          <option value="watch">Watch</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>Price</td>
+      <td><input type="number" id="pr" /></td>
+    </tr>
+    <tr>
+      <td>Quantity</td>
+      <td><input type="number" id="qu" /></td>
+    </tr>
+    <tr>
+      <td colspan="2" align="center">
+        <button onclick="addData()" id="addBtn">Add</button>
+        <button onclick="updateData()" id="updateBtn" style="display:none;">Update</button>
+        <button onclick="printList()">Print</button>
+      </td>
+    </tr>
+  </table>
+
+  <!-- Output Table -->
+  <div id="product_list"></div>
+
+  <!-- JavaScript -->
+  <script>
+    let arrproduct_name = [];
+    let arrproduct_price = [];
+    let arrproduct_quantity = [];
+    let editIndex = -1;
+
+    function addData() {
+      const pname = document.getElementById("pname").value;
+      const price = document.getElementById("pr").value;
+      const quantity = document.getElementById("qu").value;
+
+      if (pname === "select" || price === "" || quantity === "") {
+        alert("Please fill all fields correctly.");
+        return;
+      }
+
+      arrproduct_name.push(pname);
+      arrproduct_price.push(price);
+      arrproduct_quantity.push(quantity);
+
+      clearInputs();
+      displayData();
+    }
+
+    function displayData() {
+      let tb = "<table><tr><th>S.No</th> <th>Product</th> <th>Price</th> <th>Quantity</th> <th>Action</th> </tr>";
+
+      for (let i = 0; i < arrproduct_name.length; i++) {
+        tb += `<tr>
+                  <td>${i + 1}</td>
+                  <td>${arrproduct_name[i]}</td>
+                  <td>${arrproduct_price[i]}</td>
+                  <td>${arrproduct_quantity[i]}</td>
+                  <td><button onclick="editData(${i})">Edit</button></td>
+               </tr>`;
+      }
+
+      tb += "</table>";
+      document.getElementById("product_list").innerHTML = tb;
+    }
+
+    function editData(index) {
+      document.getElementById("pname").value = arrproduct_name[index];
+      document.getElementById("pr").value = arrproduct_price[index];
+      document.getElementById("qu").value = arrproduct_quantity[index];
+      editIndex = index;
+      document.getElementById("addBtn").style.display = "none";
+      document.getElementById("updateBtn").style.display = "inline";
+    }
+
+    function updateData() {
+      if (editIndex !== -1) {
+        arrproduct_name[editIndex] = document.getElementById("pname").value;
+        arrproduct_price[editIndex] = document.getElementById("pr").value;
+        arrproduct_quantity[editIndex] = document.getElementById("qu").value;
+
+        editIndex = -1;
+        displayData();
+        clearInputs();
+        document.getElementById("addBtn").style.display = "inline";
+        document.getElementById("updateBtn").style.display = "none";
+      }
+    }
+
+    function clearInputs() {
+      document.getElementById("pname").value = "select";
+      document.getElementById("pr").value = "";
+      document.getElementById("qu").value = "";
+    }
+
+    function printList() {
+      const content = document.getElementById("product_list").innerHTML;
+      const printWindow = window.open('', '', 'width=800,height=600');
+      printWindow.document.write('<html><head><title>Print</title></head><body>');
+      printWindow.document.write(content);
+      printWindow.document.write('</body></html>');
+      printWindow.document.close();
+      printWindow.focus();
+      printWindow.print();
+    } 
+ </script>
+
+</body>
+</html>

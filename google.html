@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Google Search</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #fff;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      padding: 20px 30px 10px;
+      justify-content: space-between;
+    }
+
+    .logo {
+      height: 30px;
+      margin-right: 20px;
+    }
+
+    /* Search Bar */
+    .search-container {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      max-width: 700px;
+      margin: 0 20px;
+    }
+
+    .search-bar {
+      width: 100%;
+      padding: 10px 15px;
+      border-radius: 24px;
+      border: 1px solid #dfe1e5;
+      font-size: 16px;
+      box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-bar input {
+      border: none;
+      outline: none;
+      flex: 1;
+      font-size: 16px;
+    }
+
+    .icons {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .icons img {
+      height: 20px;
+      cursor: pointer;
+    }
+
+    .right-icons {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .profile {
+      background: #004d40;
+      color: white;
+      border-radius: 50%;
+      padding: 8px 12px;
+      font-weight: bold;
+    }
+
+    /* Tabs */
+    .tabs {
+      display: flex;
+      gap: 20px;
+      padding: 10px 50px;
+      font-size: 14px;
+      border-bottom: 1px solid #dadce0;
+    }
+
+    .tab {
+      color: #5f6368;
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .tab.active {
+      color: #1a73e8;
+      font-weight: bold;
+    }
+
+    .tab.active::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #1a73e8;
+    }
+
+    .tools {
+      margin-left: auto;
+      color: #5f6368;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" class="logo" alt="Google">
+    <div class="search-container">
+      <div class="search-bar">
+        <input type="text" value="raghuveer suthar" />
+        <div class="icons">
+          <img src="https://img.icons8.com/ios/50/000000/delete-sign--v1.png" alt="X" height="16" />
+          <img src="https://img.icons8.com/ios-filled/50/000000/microphone.png" alt="Mic" height="16" />
+          <img src="https://img.icons8.com/material-outlined/24/000000/image.png" alt="Lens" height="16" />
+          <img src="https://img.icons8.com/ios-filled/50/000000/search--v1.png" alt="Search" height="16" />
+        </div>
+      </div>
+    </div>
+    <div class="right-icons">
+      <img src="https://img.icons8.com/ios-filled/50/000000/test-tube.png" alt="Test" height="20" />
+      <img src="https://img.icons8.com/ios-filled/50/000000/menu-2.png" alt="Menu" height="20" />
+      <div class="profile">R</div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active">All</div>
+    <div class="tab">Images</div>
+    <div class="tab">Videos</div>
+    <div class="tab">News</div>
+    <div class="tab">Shopping</div>
+    <div class="tab">Short videos</div>
+    <div class="tab">Forums</div>
+    <div class="tab">More ▾</div>
+    <div class="tools">Tools ▾</div>
+  </div>
+
+</body>
+</html>
