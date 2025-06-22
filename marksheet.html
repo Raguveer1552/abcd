@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>School Marksheet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f9f9f9;
+    }
+    .marksheet {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      border: 2px solid #000;
+      background-color: #fff;
+    }
+    h1, h2 {
+      text-align: center;
+    }
+    .school-info {
+      margin-bottom: 25px;
+    }
+    .student-details td {
+      padding: 6px 10px;
+      font-size: 16px;
+    }
+    .marks-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .marks-table th, .marks-table td {
+      border: 1px solid #000;
+      padding: 10px;
+      text-align: center;
+    }
+    .marks-table th {
+      background-color: #dfefff;
+    }
+    .footer {
+      margin-top: 30px;
+      font-size: 16px;
+    }
+    .result-box {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input[type="number"] {
+      width: 60px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="marksheet">
+    <div class="school-info">
+      <h1>Green Valley High School</h1>
+      <h2>Academic Report Card - 2024-2025</h2>
+      <p>Affiliated to CBSE | School Code: 123456</p>
+    </div>
+
+    <table class="student-details">
+      <tr>
+        <td><strong>Student Name:</strong> Rahul Sharma</td>
+        <td><strong>Roll No:</strong> 17</td>
+      </tr>
+      <tr>
+        <td><strong>Class:</strong> 10th A</td>
+        <td><strong>Admission No:</strong> GVHS20231017</td>
+      </tr>
+    </table>
+
+    <table class="marks-table" id="marksTable">
+      <thead>
+        <tr>
+          <th>Subject</th>
+          <th>Max Internal</th>
+          <th>Internal</th>
+          <th>Max External</th>
+          <th>External</th>
+          <th>Total</th>
+          <th>Grade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>English</td>
+          <td>20</td>
+          <td><input type="number" class="internal" max="20" /></td>
+          <td>80</td>
+          <td><input type="number" class="external" max="80" /></td>
+          <td class="total">0</td>
+          <td class="grade">--</td>
+        </tr>
+        <tr>
+          <td>Mathematics</td>
+          <td>20</td>
+          <td><input type="number" class="internal" max="20" /></td>
+          <td>80</td>
+          <td><input type="number" class="external" max="80" /></td>
+          <td class="total">0</td>
+          <td class="grade">--</td>
+        </tr>
+        <tr>
+          <td>Science</td>
+          <td>20</td>
+          <td><input type="number" class="internal" max="20" /></td>
+          <td>80</td>
+          <td><input type="number" class="external" max="80" /></td>
+          <td class="total">0</td>
+          <td class="grade">--</td>
+        </tr>
+        <tr>
+          <td>Social Studies</td>
+          <td>20</td>
+          <td><input type="number" class="internal" max="20" /></td>
+          <td>80</td>
+          <td><input type="number" class="external" max="80" /></td>
+          <td class="total">0</td>
+          <td class="grade">--</td>
+        </tr>
+        <tr>
+          <td>Hindi</td>
+          <td>20</td>
+          <td><input type="number" class="internal" max="20" /></td>
+          <td>80</td>
+          <td><input type="number" class="external" max="80" /></td>
+          <td class="total">0</td>
+          <td class="grade">--</td>
+        </tr>
+        <tr>
+          <th>Total</th>
+          <th>100</th>
+          <th id="totalInternal">0</th>
+          <th>400</th>
+          <th id="totalExternal">0</th>
+          <th id="grandTotal">0</th>
+          <th>--</th>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="footer">
+      <div class="result-box">
+        <p><strong>Percentage:</strong> <span id="percentage">--</span>%</p>
+        <p><strong>Result:</strong> <span id="result">--</span></p>
+      </div>
+      <p><strong>Signature of Principal:</strong> _____________________</p>
+    </div>
+  </div>
+
+ <script>
+    const internalInputs = document.querySelectorAll('.internal');
+    const externalInputs = document.querySelectorAll('.external');
+    const totalCells = document.querySelectorAll('.total');
+    const gradeCells = document.querySelectorAll('.grade');
+
+    const totalInternalEl = document.getElementById('totalInternal');
+    const totalExternalEl = document.getElementById('totalExternal');
+    const grandTotalEl = document.getElementById('grandTotal');
+    const resultEl = document.getElementById('result');
+    const percentageEl = document.getElementById('percentage');
+
+    function getGrade(marks) {
+      if (marks >= 90) return 'A+';
+      if (marks >= 80) return 'A';
+      if (marks >= 70) return 'B+';
+      if (marks >= 60) return 'B';
+      if (marks >= 50) return 'C';
+      return 'F';
+    }
+
+    function calculate() {
+      let totalInternal = 0, totalExternal = 0, grandTotal = 0;
+      let isPass = true;
+
+      for (let i = 0; i < internalInputs.length; i++) {
+        const internal = parseInt(internalInputs[i].value) || 0;
+        const external = parseInt(externalInputs[i].value) || 0;
+        const subjectTotal = internal + external;
+
+        totalInternal += internal;
+        totalExternal += external;
+        grandTotal += subjectTotal;
+
+        totalCells[i].textContent = subjectTotal;
+        const grade = getGrade(subjectTotal);
+        gradeCells[i].textContent = grade;
+
+        if (grade === 'F') isPass = false;
+      }
+
+      totalInternalEl.textContent = totalInternal;
+      totalExternalEl.textContent = totalExternal;
+      grandTotalEl.textContent = grandTotal;
+
+      const percentage = (grandTotal / 500 * 100).toFixed(2);
+      percentageEl.textContent = percentage;
+
+      resultEl.textContent = isPass ? 'Passed' : 'Failed';
+      resultEl.style.color = isPass ? 'green' : 'red';
+    }
+
+    internalInputs.forEach(input => input.addEventListener('input', calculate));
+    externalInputs.forEach(input => input.addEventListener('input', calculate));
+  </script> 
+
+</body>
+</html>
