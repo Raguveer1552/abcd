@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login page</title>
+    <script>
+        let count=1;
+        let time=10;
+        const btnlock=()=>{
+            document.getElementById("msg").innerHTML="Button Unlock After "+time+" seconds";
+            time--;
+            if(time==0){
+                document.getElementById("loginbtn").disabled=false
+                time=10;
+                count=0;
+                document.getElementById("msg").innerHTML="";
+            }      
+            else
+            {
+                setTimeout("btnlock()",1000);       
+            }
+        }
+        
+    const login_check=()=>
+    {
+        if(count==3){
+            document.getElementById("loginbtn").disabled=true;
+            btnlock();
+        }
+        else
+        {
+        let username=document.getElementById("nm").value;
+        let password=document.getElementById("pass").value;
+
+        if(username=="admin" && password=="123")
+            window.location.href="aa.html";
+        else{
+            count++;
+           alert("invalid usrename and password"); }
+        }
+    }
+    </script>
+</head>
+<body>
+     <table border="1" align="center" cellspacing="0" cellpadding="10">
+       
+    <tr>
+        <td>Username</td>
+        <td><input type="text" id="nm" value=""/></td>
+    </tr>
+ 
+    <tr>
+        <td>password</td>
+        <td><input type="password" id="pass" value=""/></td>
+    </tr>
+    <tr>
+        <td colspan="2" align="center">
+        <input type="button" id="loginbtn" onclick="login_check()" value="send"/>
+
+        </td>
+   </tr>
+   <tr>
+    <td colspan="2" 
+        style="color: red; font-weight:bold;" 
+        align="center" 
+        id="msg"> </td>
+   </tr>
+</table>
+</body>
+</html>
